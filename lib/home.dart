@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
                     ),
                     validator: (v) {
                       if (v == null || v.isEmpty) {
-                        return 'You must enter a value for the title.';
+                        return 'You must enter a value for the title!';
                       }
                       return null;
                     },
