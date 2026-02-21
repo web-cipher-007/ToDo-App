@@ -12,6 +12,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   final _formGlobalKey = GlobalKey<FormState>();
+  Priority _selectedPriority = Priority.medium;
+  String _title = '';
+  String _dscrptn = '';
 
   final List<Todo> todos = [
     const Todo(
@@ -64,6 +67,9 @@ class _HomeState extends State<Home> {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      _title = value!;
+                    },
                   ),
 
                   // todo description
@@ -78,16 +84,51 @@ class _HomeState extends State<Home> {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      _dscrptn = value!;
+                    },
                   ),
 
                   // priority
+                  DropdownButtonFormField(
+                  initialValue: _selectedPriority, 
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedPriority = value!;
+                    });
+                    print(value);
+                  },
+                  decoration: const InputDecoration(
+                    label: Text('List Priority'),
+                  ),
+                  items:
+                    Priority.values.map((p) {
+                      return DropdownMenuItem(
+                        value: p,
+                        child: Text(p.title),
+                      );
+                    }).toList(),
+                  ),
+                 
                  
 
                   // submit button
                   const SizedBox(height: 20),
                   FilledButton(
                     onPressed: () {
-                      _formGlobalKey.currentState!.validate();
+                      if(_formGlobalKey.currentState!.validate()) {
+                        _formGlobalKey.currentState!.save();
+
+                        setState(() {
+                          todos.add(
+                            Todo(
+                              title: _title, 
+                              description: _dscrptn, 
+                              priority: _selectedPriority
+                            )
+                          );
+                        });
+                      }
                     },
                     style: FilledButton.styleFrom(
                       backgroundColor: Colors.grey[800],
