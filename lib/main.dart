@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_forms_files/home.dart';
+import 'package:flutter_forms_files/add_todo_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Todo App',
-      home: Home(),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const Home(),
+        '/add': (context) => const AddTodoPage(),
+      },
     );
   }
 }
