@@ -1,5 +1,5 @@
 # A simple TODO App made with Flutter.
-This is one my personal projects that I made while learning about Forms and their validation in Flutter.<br>
+This is one of my personal projects that I made while learning about Forms and their validation in Flutter.<br>
 ## App Screenshots
 <div align="center">
 <table border="0">
